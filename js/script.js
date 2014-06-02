@@ -14,14 +14,16 @@ FB.getLoginStatus(function(response) {
     //呼叫api把圖片放到#preview IMG tag 內
     var uid = response.authResponse.userID;
     var accessToken = response.authResponse.accessToken;
+    FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
+    	console.log(response.data);
+		var str="<img src="+ response.data.url +">";
+		$('#preview1') = response.data
+		$('#name').append(str);
+	});
     FB.api('/me', function (response) {
 		var name = "<h1>" + response.name + "</h1>";
 		$('#name').append(name);
     });
-    FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-		var str="<img src="+ response.data.url +">";
-		$('#name').append(str);
-	});
     // console.log(response);
     
   } else if (response.status === 'not_authorized') {
