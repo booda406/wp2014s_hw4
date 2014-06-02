@@ -17,6 +17,7 @@ FB.getLoginStatus(function(response) {
     FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
 		var str="<img src="+ response.data.url +">";
 		$('#fb-root').append(str);
+		$('#name').innerHTML = response.name;
 	});
     // console.log(response);
     
