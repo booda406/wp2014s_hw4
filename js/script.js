@@ -15,9 +15,8 @@ FB.getLoginStatus(function(response) {
     var uid = response.authResponse.userID;
     var accessToken = response.authResponse.accessToken;
     FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-    	console.log(response.data);
 		var str="<img src="+ response.data.url +">";
-		$('#preview1') = response.data
+		$('#preview1') = response.data.url;
 		$('#name').append(str);
 	});
     FB.api('/me', function (response) {
