@@ -1,0 +1,150 @@
+<!doctype html>
+<html prefix="og:http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <meta property="og:title" content="Facebook API test" >
+    <meta property="og:type" content="website" >
+    <meta property="og:url" content="http://booda406.github.io/web_test" >
+    <meta property="og:image" content="https://www.facebook.com/Bnlsteven/profile_picture" >
+
+    <title>HTML5 Canvas & facebook</title>
+    <meta name="description" content=" ">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+	<style>
+    #canvas {border: 3px solid grey;}
+    </style>
+</head>
+
+<body>
+    <div id="fb-root"></div>
+<script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '581530521961724', //api 2.0 nccu web test
+                xfbml: true,
+                version: 'v2.0'
+            });
+
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+                    FB.api('/me', function (response) {
+                        console.log(response);
+                        console.log('My links is' + response.link);
+                        var name = document.getElementById('name');
+                        name.innerHTML = response.name;
+                        console.log('My Username is' + response.name);
+                        console.log('My ID is' + response.id);
+                    });
+
+
+                    FB.ui({
+                        method: 'share',
+                        href: 'https://booda406.github.io/web_test',
+                    }, function (response) {});
+                    
+                    
+
+
+                    /*FB.ui({
+                        method: 'send',
+                        link: 'http://www.nytimes.com/2011/06/15/arts/people-argue-just-to-win-scholars-assert.html',
+                    });*/
+
+                    /*FB.api('/me/likes', function (response) {
+                        for (var i = 0; i < response.length; i++){
+                            console.log(response.data.name);
+                            }
+                    });*/
+                    
+                    FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
+                        var str="<img src="+ response.data.url +">";
+                        $('body').append(str);
+                    });
+                    
+                    
+                    
+                    /*FB.api('/me/photos', 'post', {
+                        name: 'this is a new photo',
+                        message: 'this is parse photo',
+                        url: "img/overlay.png"
+                    }, function (response) {
+                        if (!response || response.error) {
+                            alert('Error occured:' + response);
+                        } else {
+                            alert('Post ID: ' + response.id);
+                        }
+                    });
+*/                  
+
+
+
+                } else if (response.status === 'not_authorized') {
+                    console.log("this user is not authorizied your apps");
+                    FB.login(function (response) {
+                        // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
+                        if (response.authResponse) { // if user login to your apps right after handle an event
+                            window.location.reload();
+                        };
+                    }/*, {
+                        scope: 'user_about_me,email,user_location,user_photos,publish_actions,user_birthday,user_likes'
+                    }*/);
+                } else {
+                    console.log("this isn't logged in to Facebook.");
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            window.location.reload();
+                        } else {
+                            //alertify.alert('An Error has Occurs,Please Reload your Pages');
+                        }
+                    });
+                }
+            });
+
+
+
+
+        }; //<<<<<<<<<<<<<<<init end
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div id="name"></div>
+    <section id="main">
+        <h2>This is a HTML5 Canvas Pages with Facebook</h2>
+        <canvas width="540" height="540" id="canvas"></canvas>
+    </section>
+    <div class="inputtext" style="width:600px; margin:0 auto;">
+        <label for="inputed">輸入客製化文字：
+            <textarea name="inputed" maxlength="6" id="inputed" placeholder="限輸6字"></textarea><!-- 提供使用者輸入文字欄-->
+        </label>
+        <br>
+        <button id="sentimg" onClick="PostImageToFacebook()">Post to Facebook</button><!-- 傳送按鈕-->
+    </div>
+    <div class="info"></div><!-- 訊息欄位-->
+
+    
+
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
+
+
