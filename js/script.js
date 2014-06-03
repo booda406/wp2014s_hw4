@@ -137,15 +137,16 @@ FB.getLoginStatus(function(response) {
 						});
 					console.log(allPhotos[i].url);
 					a = document.createElement('a');
-                    a.innerHTML = allPhotos[i].name;
+					if(allPhotos[i].name===undefined){
+						a.innerHTML = "未命名"
+					}else{
+                    	a.innerHTML = allPhotos[i].name;
+                    }
                     a.href = allPhotos[i].url;
                     li.appendChild(a);
 					}
 					// console.log(albumResponse.data[i].name);
-					// deferreds[album.id] = $.Deferred();
-
 					// console.log(albumId);
-					// deferreds[albumId].resolve();
 				});
 			}
 		});
