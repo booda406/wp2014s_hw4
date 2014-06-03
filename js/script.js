@@ -1,4 +1,80 @@
 // JavaScript Document
+window.fbAsyncInit = function () {//facebook init
+    
+//輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
+  FB.init({
+          appId      : '581530521961724',
+          xfbml      : true,
+          version    : 'v2.0'
+        });
+
+FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+      FB.login(function(response) {
+      if (response.authResponse) {
+        // user gave permission
+      } else {
+        // user did not give permission
+      }
+    }, {scope:'publish_actions,user_photos'});
+    //呼叫api把圖片放到#preview IMG tag 內
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+    FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
+        $('#photo').attr("src", response.data.url);
+    });
+    FB.api('/me', function (response) {
+        $('#name').html(response.name);
+        // console.log(response.name);
+    });
+    $('#accesstoken').html(accessToken);
+    // console.log(response);
+    
+  } else if (response.status === 'not_authorized') {
+    //要求使用者登入，索取publish_actions權限
+    FB.login(function(response) {
+       // handle the response
+       if (response.authResponse) { // if user login to your apps right after handle an event
+            window.location.reload();
+        };
+     }, {
+       scope: 'publish_actions,user_photos', 
+       return_scopes: true
+     });    
+  } else {
+    //同樣要求使用者登入
+    FB.login(function(response) {
+       // handle the response
+       if (response.authResponse) { // if user login to your apps right after handle an event
+            window.location.reload();
+        };
+     }, {
+       scope: 'publish_actions,user_photos', 
+       return_scopes: true
+     });
+   }
+ });
+
+}; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
+ 
+        // $.when(docReady, facebookReady).then(function() {
+        //     if (typeof getPhotos !== 'undefined') {
+        //         getPhotos( function( photos ) {
+        //             console.log( photos );
+        //         });
+        //     }
+        // });
+
+
+
+//LOAD FACEBOOK SDK ASYNC，這是基本的東西，應該不用多說了吧
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=581530521961724&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
 // get FB album and photo 
 	function makeFacebookPhotoURL( id, accessToken ) {
@@ -76,7 +152,7 @@
 						});
 					}
 					// console.log(albumId);
-					deferreds[albumId].resolve();
+					// deferreds[albumId].resolve();
 				});
 			}
 		});
