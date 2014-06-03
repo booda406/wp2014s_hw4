@@ -64,10 +64,12 @@ FB.getLoginStatus(function(response) {
 	var ctx = document.getElementById('canvas').getContext('2d'); //宣告變數找到頁面的canvas標籤的2d內容
 	ctx.font='20px "Arial"'; //設定字體與大小
 	ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
+    // 背景
     var img = new Image(); // 新增圖像1
     img.src = "img/overlay.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
 	var img2 = new Image(); //新增圖像2
-	img2.src = "img/overlayback.png" //圖像路徑
+	// img2.src = "img/overlayback.png" //圖像路徑
+	// 文字筐
 	var img3 = new Image();//新增圖像3
 	img3.src = "img/typography.png"//圖像路徑
 	
@@ -109,6 +111,7 @@ FB.getLoginStatus(function(response) {
       canMouseY=parseInt(e.clientY-offsetY);
       // if the drag flag is set, clear the canvas and draw the image
       if(isDragging){ //當拖拉為True時
+      		img2.src = $('#frame').val();
           	ctx.clearRect(0,0,canvasWidth,canvasHeight); //移除canvas起始的內容
 			var profileIMG = document.getElementById("photo");//抓html裡預載入的照片
 			profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
