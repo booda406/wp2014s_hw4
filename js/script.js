@@ -132,15 +132,15 @@ FB.getLoginStatus(function(response) {
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
 						});
 					}
-					console.log(albumResponse);
-					console.log(allPhotos);
+					console.log(albumResponse.data[i].name);
+					console.log(allPhotos[i].url);
+					// var li = document.createElement('li');
+					// li.innerHTML = deferreds[album.id]
+					// ul.appendChild(li);
 					// a = document.createElement('a');
                     // a.innerHTML = album.name;
                     // a.href = album.link;
                     // li.appendChild(a);
-					// var li = document.createElement('li');
-					// li.innerHTML = deferreds[album.id]
-					// ul.appendChild(li);
 					// deferreds[album.id] = $.Deferred();
 
 					// console.log(albumId);
