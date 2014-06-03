@@ -284,11 +284,9 @@ function dataURItoBlob(dataURI) {
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
 						});
 					}
-					console.log(albumId);
+					// console.log(albumId);
 					// deferreds[albumId].resolve();
 				});
 			}
-			console.log(deferreds);
-			console.log(listOfDeferreds);
 		});
 	}
