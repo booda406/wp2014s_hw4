@@ -120,6 +120,9 @@ FB.getLoginStatus(function(response) {
 		 
 			for (i = 0; i < albumResponse.data.length; i++) {
 				album = albumResponse.data[i];
+				var li = document.createElement('li');
+				li.innerHTML = album.name;
+				ul.appendChild(li);
 				listOfDeferreds.push( deferreds[album.id] );
 				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
 					var i, facebookPhoto;
@@ -129,18 +132,16 @@ FB.getLoginStatus(function(response) {
 						allPhotos.push({
 							'id' : facebookPhoto.id,
 							'added'	: facebookPhoto.created_time,
-							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
+							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken ),
+							'name' : facebookPhoto.name
 						});
-					}
-					console.log(albumResponse.data[i].name);
 					console.log(allPhotos[i].url);
-					// var li = document.createElement('li');
-					// li.innerHTML = deferreds[album.id]
-					// ul.appendChild(li);
-					// a = document.createElement('a');
-                    // a.innerHTML = album.name;
-                    // a.href = album.link;
-                    // li.appendChild(a);
+					a = document.createElement('a');
+                    a.innerHTML = allPhotos[i].name;
+                    a.href = allPhotos[i].url;
+                    li.appendChild(a);
+					}
+					// console.log(albumResponse.data[i].name);
 					// deferreds[album.id] = $.Deferred();
 
 					// console.log(albumId);
