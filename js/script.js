@@ -240,6 +240,18 @@ function dataURItoBlob(dataURI) {
 		);
 	}
 
+	function getLikesForPhotoId( photoId, callback ) {
+		FB.api(
+				'/'+albumId+'/photos/'+photoId+'/likes',
+				{},
+				function(photoLikesResponse) {
+					if (callback) {
+						callback( photoId, photoLikesResponse );
+					}
+				}
+			);
+	}
+
 	function getPhotos(){
 		var allPhotos = [];
 		var	accessToken = $('#accesstoken').html();
@@ -265,14 +277,18 @@ function dataURItoBlob(dataURI) {
 					var i, facebookPhoto;
 					for (i = 0; i < albumPhotosResponse.data.length; i++) {
 						facebookPhoto = albumPhotosResponse.data[i];
-						console.log(facebookPhoto);
+						// console.log(facebookPhoto);
 						allPhotos.push({
 							'id' : facebookPhoto.id,
+							'added'	: facebookPhoto.created_time,
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
 						});
 					}
-					deferreds[albumId].resolve();
+					console.log(albumId);
+					// deferreds[albumId].resolve();
 				});
 			}
+			console.log(deferreds);
+			console.log(listOfDeferreds);
 		});
 	}
