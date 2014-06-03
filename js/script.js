@@ -137,12 +137,14 @@ FB.getLoginStatus(function(response) {
 						});
 					console.log(allPhotos[i].url);
 					a = document.createElement('a');
+					a.style.display = "block";
+					a.onClick="change_photo(allPhotos[i].url)";
 					if(allPhotos[i].name===undefined){
 						a.innerHTML = "未命名"
 					}else{
                     	a.innerHTML = allPhotos[i].name;
                     }
-                    a.href = allPhotos[i].url;
+                    // a.href = allPhotos[i].url;
                     li.appendChild(a);
 					}
 					// console.log(albumResponse.data[i].name);
