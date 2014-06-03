@@ -260,6 +260,7 @@ function dataURItoBlob(dataURI) {
 					var i, facebookPhoto;
 					for (i = 0; i < albumPhotosResponse.data.length; i++) {
 						facebookPhoto = albumPhotosResponse.data[i];
+						console.log(facebookPhoto);
 						allPhotos.push({
 							'id' : facebookPhoto.id,
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
@@ -268,7 +269,5 @@ function dataURItoBlob(dataURI) {
 					deferreds[albumId].resolve();
 				});
 			}
-			console.log(deferreds);
-			console.log(listOfDeferreds);
 		});
 	}
