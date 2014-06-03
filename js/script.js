@@ -151,6 +151,7 @@ FB.getLoginStatus(function(response) {
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
 						});
 					}
+					console.log(allPhotos);
 					// console.log(albumId);
 					// deferreds[albumId].resolve();
 				});
