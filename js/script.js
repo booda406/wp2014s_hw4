@@ -8,6 +8,7 @@ window.fbAsyncInit = function () {//facebook init
           xfbml      : true,
           version    : 'v2.0'
         });
+ facebookReady.resolve();
 
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
@@ -285,7 +286,7 @@ function dataURItoBlob(dataURI) {
 						});
 					}
 					// console.log(albumId);
-					// deferreds[albumId].resolve();
+					deferreds[albumId].resolve();
 				});
 			}
 		});

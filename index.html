@@ -62,6 +62,10 @@
 
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
+        var docReady = $.Deferred();
+        var facebookReady = $.Deferred();
+
+        $(document).ready(docReady.resolve);
     $.when(docReady, facebookReady).then(function() {
             if (typeof getPhotos !== 'undefined') {
                 getPhotos( function( photos ) {
