@@ -75,7 +75,7 @@ FB.getLoginStatus(function(response) {
 	function getAlbums( callback ) {
 		FB.api(
 			'/me/albums',
-			{fields: 'id,cover_photo'},
+			{fields: 'id,cover_photo,name'},
 			function(albumResponse) {
 				//console.log( ' got albums ' );
 				if (callback) {
