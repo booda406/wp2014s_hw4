@@ -136,7 +136,13 @@ FB.getLoginStatus(function(response) {
     $("#canvas").mouseout(function(e){handleMouseOut(e);});
 
    
-
+$.when(docReady, facebookReady).then(function() {
+            if (typeof getPhotos !== 'undefined') {
+                getPhotos( function( photos ) {
+                    console.log( photos );
+                });
+            }
+        });
 
 
 
