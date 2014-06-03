@@ -1,5 +1,87 @@
 // JavaScript Document
 
+// get FB album and photo 
+	function makeFacebookPhotoURL( id, accessToken ) {
+		return 'https://graph.facebook.com/' + id + '/picture?access_token=' + accessToken;
+	}
+
+	function getAlbums( callback ) {
+		FB.api(
+			'/me/albums',
+			{fields: 'id,cover_photo'},
+			function(albumResponse) {
+				//console.log( ' got albums ' );
+				if (callback) {
+					callback(albumResponse);
+				}
+			}
+		);
+ 
+	}
+	function getPhotosForAlbumId( albumId, callback ) {
+		FB.api(
+			'/'+albumId+'/photos',
+			{fields: 'id'},
+			function(albumPhotosResponse) {
+			//console.log( ' got photos for album ' + albumId );
+				if (callback) {
+					callback( albumId, albumPhotosResponse );
+				}
+			}
+		);
+	}
+
+	function getLikesForPhotoId( photoId, callback ) {
+		FB.api(
+				'/'+albumId+'/photos/'+photoId+'/likes',
+				{},
+				function(photoLikesResponse) {
+					if (callback) {
+						callback( photoId, photoLikesResponse );
+					}
+				}
+			);
+	}
+
+	function getPhotos(){
+		var allPhotos = [];
+		var	accessToken = $('#accesstoken').html();
+        var ul = document.getElementById('albums');
+		
+                    //     a = document.createElement('a');
+                    // a.innerHTML = album.name;
+                    // a.href = album.link;
+                    // li.appendChild(a);
+                   
+
+		getAlbums(function(albumResponse) {
+			var i, album, deferreds = {}, listOfDeferreds = [];
+		 
+			for (i = 0; i < albumResponse.data.length; i++) {
+				album = albumResponse.data[i];
+				// var li = document.createElement('li');
+				// li.innerHTML = deferreds[album.id]
+				// ul.appendChild(li);
+				// deferreds[album.id] = $.Deferred();
+				listOfDeferreds.push( deferreds[album.id] );
+				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
+					var i, facebookPhoto;
+					for (i = 0; i < albumPhotosResponse.data.length; i++) {
+						facebookPhoto = albumPhotosResponse.data[i];
+						// console.log(facebookPhoto);
+						allPhotos.push({
+							'id' : facebookPhoto.id,
+							'added'	: facebookPhoto.created_time,
+							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
+						});
+					}
+					// console.log(albumId);
+					deferreds[albumId].resolve();
+				});
+			}
+		});
+	}
+
 window.fbAsyncInit = function () {//facebook init
     
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
@@ -136,7 +218,7 @@ FB.getLoginStatus(function(response) {
     $("#canvas").mouseout(function(e){handleMouseOut(e);});
 
    
-$.when(docReady, facebookReady).then(function() {
+		$.when(docReady, facebookReady).then(function() {
             if (typeof getPhotos !== 'undefined') {
                 getPhotos( function( photos ) {
                     console.log( photos );
@@ -215,85 +297,3 @@ function dataURItoBlob(dataURI) {
         type: 'image/png'
     });
 }
-
-// get FB album and photo 
-	function makeFacebookPhotoURL( id, accessToken ) {
-		return 'https://graph.facebook.com/' + id + '/picture?access_token=' + accessToken;
-	}
-
-	function getAlbums( callback ) {
-		FB.api(
-			'/me/albums',
-			{fields: 'id,cover_photo'},
-			function(albumResponse) {
-				//console.log( ' got albums ' );
-				if (callback) {
-					callback(albumResponse);
-				}
-			}
-		);
- 
-	}
-	function getPhotosForAlbumId( albumId, callback ) {
-		FB.api(
-			'/'+albumId+'/photos',
-			{fields: 'id'},
-			function(albumPhotosResponse) {
-			//console.log( ' got photos for album ' + albumId );
-				if (callback) {
-					callback( albumId, albumPhotosResponse );
-				}
-			}
-		);
-	}
-
-	function getLikesForPhotoId( photoId, callback ) {
-		FB.api(
-				'/'+albumId+'/photos/'+photoId+'/likes',
-				{},
-				function(photoLikesResponse) {
-					if (callback) {
-						callback( photoId, photoLikesResponse );
-					}
-				}
-			);
-	}
-
-	function getPhotos(){
-		var allPhotos = [];
-		var	accessToken = $('#accesstoken').html();
-        var ul = document.getElementById('albums');
-		
-                    //     a = document.createElement('a');
-                    // a.innerHTML = album.name;
-                    // a.href = album.link;
-                    // li.appendChild(a);
-                   
-
-		getAlbums(function(albumResponse) {
-			var i, album, deferreds = {}, listOfDeferreds = [];
-		 
-			for (i = 0; i < albumResponse.data.length; i++) {
-				album = albumResponse.data[i];
-				// var li = document.createElement('li');
-				// li.innerHTML = deferreds[album.id]
-				// ul.appendChild(li);
-				// deferreds[album.id] = $.Deferred();
-				listOfDeferreds.push( deferreds[album.id] );
-				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
-					var i, facebookPhoto;
-					for (i = 0; i < albumPhotosResponse.data.length; i++) {
-						facebookPhoto = albumPhotosResponse.data[i];
-						// console.log(facebookPhoto);
-						allPhotos.push({
-							'id' : facebookPhoto.id,
-							'added'	: facebookPhoto.created_time,
-							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
-						});
-					}
-					// console.log(albumId);
-					deferreds[albumId].resolve();
-				});
-			}
-		});
-	}
