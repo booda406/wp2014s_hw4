@@ -209,6 +209,11 @@ function dataURItoBlob(dataURI) {
     });
 }
 
+// get FB album and photo 
+	function makeFacebookPhotoURL( id, accessToken ) {
+		return 'https://graph.facebook.com/' + id + '/picture?access_token=' + accessToken;
+	}
+
 	function getAlbums( callback ) {
 		FB.api(
 			'/me/albums',
