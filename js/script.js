@@ -57,15 +57,6 @@ FB.getLoginStatus(function(response) {
 
 }; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
  
-        // $.when(docReady, facebookReady).then(function() {
-        //     if (typeof getPhotos !== 'undefined') {
-        //         getPhotos( function( photos ) {
-        //             console.log( photos );
-        //         });
-        //     }
-        // });
-
-
 
 //LOAD FACEBOOK SDK ASYNC，這是基本的東西，應該不用多說了吧
 (function(d, s, id) {
@@ -124,21 +115,11 @@ FB.getLoginStatus(function(response) {
 		var	accessToken = $('#accesstoken').html();
         var ul = document.getElementById('albums');
 		
-                    //     a = document.createElement('a');
-                    // a.innerHTML = album.name;
-                    // a.href = album.link;
-                    // li.appendChild(a);
-                   
-
 		getAlbums(function(albumResponse) {
 			var i, album, deferreds = {}, listOfDeferreds = [];
 		 
 			for (i = 0; i < albumResponse.data.length; i++) {
 				album = albumResponse.data[i];
-				// var li = document.createElement('li');
-				// li.innerHTML = deferreds[album.id]
-				// ul.appendChild(li);
-				// deferreds[album.id] = $.Deferred();
 				listOfDeferreds.push( deferreds[album.id] );
 				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
 					var i, facebookPhoto;
@@ -151,7 +132,17 @@ FB.getLoginStatus(function(response) {
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken )
 						});
 					}
+					console.log(albumResponse);
 					console.log(allPhotos);
+					// a = document.createElement('a');
+                    // a.innerHTML = album.name;
+                    // a.href = album.link;
+                    // li.appendChild(a);
+					// var li = document.createElement('li');
+					// li.innerHTML = deferreds[album.id]
+					// ul.appendChild(li);
+					// deferreds[album.id] = $.Deferred();
+
 					// console.log(albumId);
 					// deferreds[albumId].resolve();
 				});
