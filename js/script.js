@@ -138,7 +138,7 @@ FB.getLoginStatus(function(response) {
 					console.log(allPhotos[i].url);
 					a = document.createElement('a');
 					a.style.display = "block";
-					a.onClick="change_photo(allPhotos[i].url)";
+					a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};
 					if(allPhotos[i].name===undefined){
 						a.innerHTML = "未命名"
 					}else{
