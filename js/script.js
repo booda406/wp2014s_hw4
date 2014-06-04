@@ -121,6 +121,7 @@ FB.getLoginStatus(function(response) {
 			for (i = 0; i < albumResponse.data.length; i++) {
 				album = albumResponse.data[i];
 				var li = document.createElement('li');
+				li.id = album.id;
 				li.innerHTML = album.name;
 				ul.appendChild(li);
 				listOfDeferreds.push( deferreds[album.id] );
@@ -145,6 +146,7 @@ FB.getLoginStatus(function(response) {
                     	a.innerHTML = allPhotos[i].name;
                     }
                     // a.href = allPhotos[i].url;
+                    li = document.getElementById(album.id);
                     li.appendChild(a);
 					}
 					// console.log(albumResponse.data[i].name);
