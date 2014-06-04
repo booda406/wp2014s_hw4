@@ -126,6 +126,7 @@ FB.getLoginStatus(function(response) {
 				ul.appendChild(li);
 				listOfDeferreds.push( deferreds[album.id] );
 				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
+					console.log(album.id);
 					var i, facebookPhoto;
 					for (i = 0; i < albumPhotosResponse.data.length; i++) {
 						facebookPhoto = albumPhotosResponse.data[i];
@@ -137,16 +138,18 @@ FB.getLoginStatus(function(response) {
 							'name' : facebookPhoto.name
 						});
 					// console.log(allPhotos[i].url);
-					a = document.createElement('a');
+					a = document.createElement('button');
 					a.style.display = "block";
 					a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};
 					if(allPhotos[i].name===undefined){
-						a.innerHTML = "未命名"
+						a.innerHTML = allPhotos[i].id;
 					}else{
                     	a.innerHTML = allPhotos[i].name;
                     }
                     // a.href = allPhotos[i].url;
                     li = document.getElementById(album.id);
+                    console.log(album.id);
+                    console.log(li);
                     li.appendChild(a);
 					}
 					// console.log(albumResponse.data[i].name);
