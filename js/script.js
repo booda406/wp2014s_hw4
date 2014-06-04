@@ -121,7 +121,7 @@ FB.getLoginStatus(function(response) {
 				album = albumResponse.data[i];
 				var li = document.createElement('li');
 				li.className = "dropdown-submenu";
-				li.innerHTML = album.name;
+				li.innerHTML = "<a>" + album.name + "</a>";
 				$('#albums').append(li);
 				var ul = document.createElement('ul');
 				ul.className = "dropdown-menu";
@@ -143,7 +143,7 @@ FB.getLoginStatus(function(response) {
 							'album' : facebookPhoto.album
 						});
 					// console.log(allPhotos[i].url);
-					a = document.createElement('button');
+					a = document.createElement('li');
 					// a.style.display = "block";
 					if(facebookPhoto.picture!==undefined){
 						a.onclick = function() {$('#photo').attr("src", makeFacebookPhotoURL( facebookPhoto.id, accessToken ));};
@@ -151,9 +151,9 @@ FB.getLoginStatus(function(response) {
 						a.onclick = function() {$('#photo').attr("src", makeFacebookPhotoURL( facebookPhoto.id, accessToken ));};						
 					}
 					if(allPhotos[i].name===undefined){
-						a.innerHTML = facebookPhoto.id;
+						a.innerHTML = "<a>" + facebookPhoto.id + "</a>";
 					}else{
-                    	a.innerHTML = facebookPhoto.name;
+                    	a.innerHTML = "<a>" + facebookPhoto.name + "</a>";
                     }
                     // a.href = allPhotos[i].url;
                     ul = document.getElementById(facebookPhoto.album.id);

@@ -41,7 +41,7 @@
         <h2>This is a HTML5 Canvas Pages with Facebook</h2>
         <!-- <button onClick="getPhotos()">FB選取相簿</button> -->
     <div class="btn-group">
-        <button onClick="getPhotos()" data-toggle="dropdown" class="btn dropdown-toggle">FB選取相簿 <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn dropdown-toggle">FB選取相簿 <span class="caret"></span></button>
         <ul class="dropdown-menu" id="albums">
         </ul>
     </div>
@@ -96,6 +96,7 @@
           heavyImage.src = "img/backword2.png";
           heavyImage.src = "img/backword3.png";
           heavyImage.src = "img/backword4.png";
+          getPhotos();
         }
     </script>
 </body>
