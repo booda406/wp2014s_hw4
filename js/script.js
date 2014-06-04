@@ -142,20 +142,20 @@ FB.getLoginStatus(function(response) {
 					// console.log(allPhotos[i].url);
 					a = document.createElement('button');
 					a.style.display = "block";
-					if(allPhotos[i].picture!==undefined){
-						a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};
+					if(facebookPhoto.picture!==undefined){
+						a.onclick = function() {$('#photo').attr("src", facebookPhoto.url);};
 					}else{
-						a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};						
+						a.onclick = function() {$('#photo').attr("src", facebookPhoto.url);};						
 					}
 					if(allPhotos[i].name===undefined){
-						a.innerHTML = allPhotos[i].id;
+						a.innerHTML = facebookPhoto.id;
 					}else{
-                    	a.innerHTML = allPhotos[i].name;
+                    	a.innerHTML = facebookPhoto.name;
                     }
                     // a.href = allPhotos[i].url;
-                    li = document.getElementById(allPhotos[i].album.id);
-                    console.log(allPhotos[i].album);
-                    console.log(allPhotos[i].picture);
+                    li = document.getElementById(facebookPhoto.album.id);
+                    // console.log(allPhotos[i].album);
+                    // console.log(allPhotos[i].picture);
                     li.appendChild(a);
 					}
 					// console.log(albumResponse.data[i].name);
