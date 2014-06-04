@@ -113,8 +113,7 @@ FB.getLoginStatus(function(response) {
 	function getPhotos(){
 		var allPhotos = [];
 		var	accessToken = $('#accesstoken').html();
-        var ul = document.getElementById('albums');
-		
+
 		getAlbums(function(albumResponse) {
 			var i, album, deferreds = {}, listOfDeferreds = [];
 		 
@@ -123,7 +122,7 @@ FB.getLoginStatus(function(response) {
 				var li = document.createElement('li');
 				li.id = album.id;
 				li.innerHTML = album.name;
-				ul.appendChild(li);
+				$('#albums').append(li);
 				listOfDeferreds.push( deferreds[album.id] );
 				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
 					// console.log(album.id);
