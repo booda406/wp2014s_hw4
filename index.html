@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body onLoad="javascript:preloader()">
     <div id="fb-root"></div>
     <section id="main">
     <h1 id="name"></h1>
@@ -49,6 +49,7 @@
           <option value="img/backword2.png">Third</option>
           <option value="img/backword3.png">forth</option>
           <option value="img/backword4.png">fifth</option>
+          <option value="img/typography.png">sixth</option>
         </select> 
 <!--         <button >選取相框</button>
         <button >選取文字框</button>
@@ -66,6 +67,23 @@
     <div class="info"></div><!-- 訊息欄位-->
 
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        function preloader(){
+
+          heavyImage = new Image(); 
+          heavyImage.src = "img/overlayback.png";
+          heavyImage.src = "img/overlay2.png";
+          heavyImage.src = "img/background.png";
+          heavyImage.src = "img/background1.png";
+          heavyImage.src = "img/background2.png";
+          heavyImage.src = "img/background3.png";
+          heavyImage.src = "img/backword.png";
+          heavyImage.src = "img/backword1.png";
+          heavyImage.src = "img/backword2.png";
+          heavyImage.src = "img/backword3.png";
+          heavyImage.src = "img/backword4.png";
+        }
+    </script>
 </body>
 
 </html>
