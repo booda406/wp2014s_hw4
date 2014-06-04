@@ -67,6 +67,7 @@ FB.getLoginStatus(function(response) {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+
 // get FB album and photo 
 	function makeFacebookPhotoURL( id, accessToken ) {
 		return 'https://graph.facebook.com/' + id + '/picture?access_token=' + accessToken;
@@ -168,6 +169,7 @@ FB.getLoginStatus(function(response) {
 		});
 	}
 
+getPhotos()
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
 	
