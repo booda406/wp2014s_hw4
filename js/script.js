@@ -135,7 +135,7 @@ FB.getLoginStatus(function(response) {
 							'url' : makeFacebookPhotoURL( facebookPhoto.id, accessToken ),
 							'name' : facebookPhoto.name
 						});
-					console.log(allPhotos[i].url);
+					// console.log(allPhotos[i].url);
 					a = document.createElement('a');
 					a.style.display = "block";
 					a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};
@@ -216,12 +216,12 @@ FB.getLoginStatus(function(response) {
 			canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 			canvas.height = profileIMG.height;
 			ctx.drawImage(profileIMG,0,0);//從XY軸0，0值開始畫如profileimg
-			ctx.drawImage(img3,canMouseX,canMouseY+50); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
+			ctx.drawImage(img3,canMouseX-30,canMouseY+80); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 			ctx.drawImage(img2,0,0); //劃入img2
 			var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 			ctx.fillStyle = "black"; //字體顏色
 			ctx.font='20px "微軟正黑體"'; //字體大小和字形
-			ctx.fillText(inputedText, canMouseX+60, canMouseY+100); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
+			ctx.fillText(inputedText, canMouseX+30, canMouseY+130); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
       }
     }
 
