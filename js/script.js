@@ -88,7 +88,7 @@ FB.getLoginStatus(function(response) {
 	function getPhotosForAlbumId( albumId, callback ) {
 		FB.api(
 			'/'+albumId+'/photos',
-			{fields: 'id'},
+			{fields: 'id, name, picture, album'},
 			function(albumPhotosResponse) {
 			//console.log( ' got photos for album ' + albumId );
 				if (callback) {
