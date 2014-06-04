@@ -143,9 +143,9 @@ FB.getLoginStatus(function(response) {
 					a = document.createElement('button');
 					a.style.display = "block";
 					if(facebookPhoto.picture!==undefined){
-						a.onclick = function() {$('#photo').attr("src", facebookPhoto.url);};
+						a.onclick = function() {$('#photo').attr("src", makeFacebookPhotoURL( facebookPhoto.id, accessToken ));};
 					}else{
-						a.onclick = function() {$('#photo').attr("src", facebookPhoto.url);};						
+						a.onclick = function() {$('#photo').attr("src", makeFacebookPhotoURL( facebookPhoto.id, accessToken ));};						
 					}
 					if(allPhotos[i].name===undefined){
 						a.innerHTML = facebookPhoto.id;
