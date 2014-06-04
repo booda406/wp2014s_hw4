@@ -120,9 +120,13 @@ FB.getLoginStatus(function(response) {
 			for (i = 0; i < albumResponse.data.length; i++) {
 				album = albumResponse.data[i];
 				var li = document.createElement('li');
-				li.id = album.id;
+				li.class = "dropdown-submenu"
 				li.innerHTML = album.name;
 				$('#albums').append(li);
+				var ul = document.createElement('ul');
+				ul.class = "dropdown-menu";
+				ul.id = album.id;
+				li.appendChild(ul);
 				listOfDeferreds.push( deferreds[album.id] );
 				getPhotosForAlbumId( album.id, function( albumId, albumPhotosResponse ) {
 					// console.log(album.id);
@@ -152,10 +156,10 @@ FB.getLoginStatus(function(response) {
                     	a.innerHTML = facebookPhoto.name;
                     }
                     // a.href = allPhotos[i].url;
-                    li = document.getElementById(facebookPhoto.album.id);
+                    ul = document.getElementById(facebookPhoto.album.id);
                     // console.log(allPhotos[i].album);
                     // console.log(allPhotos[i].picture);
-                    li.appendChild(a);
+                    ul.appendChild(a);
 					}
 					// console.log(albumResponse.data[i].name);
 					// console.log(albumId);
