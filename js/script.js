@@ -113,7 +113,7 @@ FB.getLoginStatus(function(response) {
 	function getPhotos(){
 		var allPhotos = [];
 		var	accessToken = $('#accesstoken').html();
-		$("#loadFB").prop('disabled', true);
+		// $("#loadFB").prop('disabled', true);
 		getAlbums(function(albumResponse) {
 			var i, album, deferreds = {}, listOfDeferreds = [];
 		 
