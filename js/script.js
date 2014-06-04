@@ -130,7 +130,7 @@ FB.getLoginStatus(function(response) {
 					var i, facebookPhoto;
 					for (i = 0; i < albumPhotosResponse.data.length; i++) {
 						facebookPhoto = albumPhotosResponse.data[i];
-						// console.log(facebookPhoto);
+						console.log(facebookPhoto);
 						allPhotos.push({
 							'id' : facebookPhoto.id,
 							'added'	: facebookPhoto.created_time,
