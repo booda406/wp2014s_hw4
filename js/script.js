@@ -130,7 +130,7 @@ FB.getLoginStatus(function(response) {
 					var i, facebookPhoto;
 					for (i = 0; i < albumPhotosResponse.data.length; i++) {
 						facebookPhoto = albumPhotosResponse.data[i];
-						console.log(facebookPhoto);
+						// console.log(facebookPhoto);
 						allPhotos.push({
 							'id' : facebookPhoto.id,
 							'added'	: facebookPhoto.created_time,
@@ -142,14 +142,18 @@ FB.getLoginStatus(function(response) {
 					// console.log(allPhotos[i].url);
 					a = document.createElement('button');
 					a.style.display = "block";
-					a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};
+					if(allPhotos[i].picture!==undefined){
+						a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};
+					}else{
+						a.onclick = function() {$('#photo').attr("src", allPhotos[i].url);};						
+					}
 					if(allPhotos[i].name===undefined){
 						a.innerHTML = allPhotos[i].id;
 					}else{
                     	a.innerHTML = allPhotos[i].name;
                     }
                     // a.href = allPhotos[i].url;
-                    li = document.getElementById(album.id);
+                    li = document.getElementById(allPhotos[i].album.id);
                     console.log(allPhotos[i].album);
                     console.log(allPhotos[i].picture);
                     li.appendChild(a);
