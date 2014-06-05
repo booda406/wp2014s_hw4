@@ -120,9 +120,9 @@ FB.getLoginStatus(function(response) {
 	}
 
 	function getPhotos(){
+    $("#loadFB").hide();
 		var allPhotos = [];
-		var	accessToken = $('#accesstoken').html();
-		$("#loadFB").hide();
+		var	accessToken = token.getInfo();
 		getAlbums(function(albumResponse) {
 			var i, album, deferreds = {}, listOfDeferreds = [];
 		 
