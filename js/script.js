@@ -244,7 +244,7 @@ FB.getLoginStatus(function(response) {
 				y = canMouseY;
 			}
 			if(frame){
-				ctx.drawImage(img2,canMouseX-130,canMouseY+20); //劃入img2
+				ctx.drawImage(img2,canMouseX-150,canMouseY-20); //劃入img2
 				ctx.drawImage(img3,x-130,y+20); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 				var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 				ctx.fillStyle = "black"; //字體顏色
