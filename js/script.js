@@ -1,15 +1,6 @@
 // JavaScript Document
 
-function Token(){
-  var accesstoken;
-  this.setInfo = function setInfo(accesstoken){
-    this.accesstoken = accessToken;    
-  }
-  this.getInfo = function getInfo() {
-    return this.accesstoken;
-  };
-}
-var token = new Token;
+var token;
 
 window.fbAsyncInit = function () {//facebook init
     
@@ -40,7 +31,7 @@ FB.getLoginStatus(function(response) {
         // console.log(response.name);
     });
 
-    token.setInfo(accessToken);
+    token = accessToken;
     // console.log(response);
     
   } else if (response.status === 'not_authorized') {
@@ -126,7 +117,7 @@ FB.getLoginStatus(function(response) {
 	function getPhotos(){
     $("#loadFB").hide();
 		var allPhotos = [];
-		var	accessToken = token.getInfo();
+		var	accessToken = token;
 		getAlbums(function(albumResponse) {
 			var i, album, deferreds = {}, listOfDeferreds = [];
 		 
@@ -286,7 +277,7 @@ FB.getLoginStatus(function(response) {
 
 // Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法，基本上這樣就可以不用動了，但思考authToken該怎麼拿到，因為這裡我並沒有把使用者登入的token載入到這函數內，所以它是不會得到token的
 function PostImageToFacebook(authToken) {
-	authToken = token.getInfo();
+	authToken = token;
 	// console.log(authToken);
 	$('.info').append('<img src="img/loading.gif"/>')//載入loading的img
     var canvas = document.getElementById("canvas");//找canvas
