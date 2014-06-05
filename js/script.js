@@ -1,11 +1,12 @@
 // JavaScript Document
 
 function Token(){
+  var accesstoken;
   this.setInfo = function setInfo(accesstoken){
     this.accesstoken = accessToken;    
   }
   this.getInfo = function getInfo() {
-        return this.accesstoken;
+    return this.accesstoken;
   };
 }
 var token = new Token;
