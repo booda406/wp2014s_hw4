@@ -1,11 +1,14 @@
 // JavaScript Document
 
-function Token(accesstoken){
-  this.accesstoken = accesstoken;
+function Token(){
+  this.setInfo = function setInfo(accesstoken){
+    this.accesstoken = accessToken;    
+  }
   this.getInfo = function getInfo() {
         return this.accesstoken;
   };
 }
+var token = new Token;
 
 window.fbAsyncInit = function () {//facebook init
     
@@ -36,7 +39,7 @@ FB.getLoginStatus(function(response) {
         // console.log(response.name);
     });
 
-    var token = new Token(accessToken);
+    token.setInfo(accessToken);
     // console.log(response);
     
   } else if (response.status === 'not_authorized') {
