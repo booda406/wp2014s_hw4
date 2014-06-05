@@ -121,7 +121,7 @@ FB.getLoginStatus(function(response) {
 				album = albumResponse.data[i];
 				var li = document.createElement('li');
 				li.className = "dropdown-submenu";
-				li.innerHTML = "<a>" + album.name + "</a>";
+				li.innerHTML = "<a tabindex='-1'>" + album.name + "</a>";
 				$('#albums').append(li);
 				var ul = document.createElement('ul');
 				ul.className = "dropdown-menu";
@@ -151,9 +151,9 @@ FB.getLoginStatus(function(response) {
 						a.onclick = function() {$('#photo').attr("src", makeFacebookPhotoURL( facebookPhoto.id, accessToken ));};						
 					}
 					if(allPhotos[i].name===undefined){
-						a.innerHTML = "<a>" + facebookPhoto.id + "</a>";
+						a.innerHTML = "<a tabindex='-1' href='#'>" + facebookPhoto.id + "</a>";
 					}else{
-                    	a.innerHTML = "<a>" + facebookPhoto.name + "</a>";
+                    	a.innerHTML = "<a tabindex='-1'>" + facebookPhoto.name + "</a>";
                     }
                     // a.href = allPhotos[i].url;
                     ul = document.getElementById(facebookPhoto.album.id);
@@ -176,8 +176,8 @@ FB.getLoginStatus(function(response) {
 	ctx.font='20px "Arial"'; //設定字體與大小
 	ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
     // 背景
-    var img = new Image(); // 新增圖像1
-    img.src = "img/overlay.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
+  var img = new Image(); // 新增圖像1
+  img.src = "img/overlay.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
 	var img2 = new Image(); //新增圖像2
 	// img2.src = "img/overlayback.png" //圖像路徑
 	// 文字筐
@@ -197,8 +197,8 @@ FB.getLoginStatus(function(response) {
     var isDragging=false;//拖拉
     var frame=false;
     var word=true;
-	var x = 0;
-	var y = 0;
+	  var x = 0;
+	  var y = 0;
 
     function handleMouseDown(e){//滑鼠按下的函數
       canMouseX=parseInt(e.clientX-offsetX);//抓滑鼠游標X
