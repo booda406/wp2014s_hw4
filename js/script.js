@@ -1,4 +1,12 @@
 // JavaScript Document
+
+function Token(accesstoken){
+  this.accesstoken = accesstoken;
+  this.getInfo = function getInfo() {
+        return this.accesstoken;
+  };
+}
+
 window.fbAsyncInit = function () {//facebook init
     
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
@@ -27,7 +35,8 @@ FB.getLoginStatus(function(response) {
         $('#name').html(response.name);
         // console.log(response.name);
     });
-    $('#accesstoken').html(accessToken);
+
+    var token = new Token(accessToken);
     // console.log(response);
     
   } else if (response.status === 'not_authorized') {
@@ -113,7 +122,7 @@ FB.getLoginStatus(function(response) {
 	function getPhotos(){
 		var allPhotos = [];
 		var	accessToken = $('#accesstoken').html();
-		$("#loadFB").prop('disabled', true);
+		$("#loadFB").hide();
 		getAlbums(function(albumResponse) {
 			var i, album, deferreds = {}, listOfDeferreds = [];
 		 
@@ -244,7 +253,7 @@ FB.getLoginStatus(function(response) {
 				y = canMouseY;
 			}
 			if(frame){
-				ctx.drawImage(img2,canMouseX-150,canMouseY-20); //劃入img2
+				ctx.drawImage(img2,canMouseX-170,canMouseY-20); //劃入img2
 				ctx.drawImage(img3,x-130,y+20); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 				var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 				ctx.fillStyle = "black"; //字體顏色
@@ -273,7 +282,7 @@ FB.getLoginStatus(function(response) {
 
 // Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法，基本上這樣就可以不用動了，但思考authToken該怎麼拿到，因為這裡我並沒有把使用者登入的token載入到這函數內，所以它是不會得到token的
 function PostImageToFacebook(authToken) {
-	authToken = $('#accesstoken').html();
+	authToken = token.getInfo();
 	// console.log(authToken);
 	$('.info').append('<img src="img/loading.gif"/>')//載入loading的img
     var canvas = document.getElementById("canvas");//找canvas
