@@ -173,7 +173,14 @@ FB.getLoginStatus(function(response) {
 
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
-	
+function canvas(){
+          $('#canvas').remove();
+          var canvas = document.createElement("canvas");
+          canvas.width="540";
+          canvas.height="540";
+          canvas.id="canvas";
+          $('#div').append(canvas);
+        
 	//起始畫面
 	var ctx = document.getElementById('canvas').getContext('2d'); //宣告變數找到頁面的canvas標籤的2d內容
 	ctx.font='20px "Arial"'; //設定字體與大小
@@ -205,6 +212,11 @@ FB.getLoginStatus(function(response) {
     var b = 0;
 	  var x = 0;
 	  var y = 0;
+      //抓取滑鼠移動的event
+    $("#canvas").mousedown(function(e){handleMouseDown(e);});
+    $("#canvas").mousemove(function(e){handleMouseMove(e);});
+    $("#canvas").mouseup(function(e){handleMouseUp(e);});
+    $("#canvas").mouseout(function(e){handleMouseOut(e);});
 
     function handleMouseDown(e){//滑鼠按下的函數
       canMouseX=parseInt(e.clientX-offsetX);//抓滑鼠游標X
@@ -228,6 +240,7 @@ FB.getLoginStatus(function(response) {
     }
 
     function handleMouseMove(e){//滑鼠移動的event
+      console.log("111");
       canMouseX=parseInt(e.clientX-offsetX);
       canMouseY=parseInt(e.clientY-offsetY);
       // if the drag flag is set, clear the canvas and draw the image
@@ -281,12 +294,8 @@ FB.getLoginStatus(function(response) {
     	word=true;
       pic=false;
     }
+}
 
-	//抓取滑鼠移動的event
-    $("#canvas").mousedown(function(e){handleMouseDown(e);});
-    $("#canvas").mousemove(function(e){handleMouseMove(e);});
-    $("#canvas").mouseup(function(e){handleMouseUp(e);});
-    $("#canvas").mouseout(function(e){handleMouseOut(e);});
 
 
 // Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法，基本上這樣就可以不用動了，但思考authToken該怎麼拿到，因為這裡我並沒有把使用者登入的token載入到這函數內，所以它是不會得到token的
