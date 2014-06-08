@@ -116,7 +116,7 @@
           $('#photo').remove();
           img = document.createElement("img");
           img.id = "photo";
-          img.crossOrigin="anonymous";
+          img.crossOrigin="*";
           img.classList.add("obj");
           img.file = file;
           $('#image').append(img);
@@ -125,14 +125,6 @@
           reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
           reader.readAsDataURL(file);
         }
-        var divimg = document.getElementById("photo");
-          divimg.addEventListener("DOMAttrModified", function(event) {
-              if (event.attrName == "src") {
-                canvas();
-                 // The `src` attribute changed!
-              }
-          });
-        
     </script>
 </body>
 

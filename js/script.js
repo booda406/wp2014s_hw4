@@ -173,13 +173,7 @@ FB.getLoginStatus(function(response) {
 
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
-function canvas(){
-  $('#canvas').remove();
-                var canvas = document.createElement("canvas");
-                canvas.width="540";
-                canvas.height="540";
-                canvas.id="canvas";
-                $('#div').append(canvas);
+
 	//起始畫面
 	var ctx = document.getElementById('canvas').getContext('2d'); //宣告變數找到頁面的canvas標籤的2d內容
 	ctx.font='20px "Arial"'; //設定字體與大小
@@ -204,9 +198,9 @@ function canvas(){
     var canvasWidth=canvas.width;//大小
     var canvasHeight=canvas.height;//高度
     var isDragging=false;//拖拉
-    window.fr=false;
-    window.word=false;
-    window.pic=true;
+    fr=false;
+    word=false;
+    pic=true;
     var a = 0;
     var b = 0;
 	  var x = 0;
@@ -245,12 +239,12 @@ function canvas(){
 			// profileIMG.crossOrigin = "anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
 			// canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 			// canvas.height = profileIMG.height;
-			if(window.pic){
+			if(pic){
         ctx.drawImage(profileIMG,canMouseX,canMouseY);//從XY軸0，0值開始畫如profileimg
         a = canMouseX;
         b = canMouseY;
       }
-			if(window.word){
+			if(word){
         ctx.drawImage(profileIMG,a,b);//從XY軸0，0值開始畫如profileimg
 				ctx.drawImage(img3,canMouseX-130,canMouseY+20); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 				var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
@@ -260,7 +254,7 @@ function canvas(){
 				x = canMouseX;
 				y = canMouseY;
 			}
-			if(window.fr){
+			if(fr){
         ctx.drawImage(profileIMG,a,b);//從XY軸0，0值開始畫如profileimg
 				ctx.drawImage(img2,canMouseX-170,canMouseY-20); //劃入img2
 				ctx.drawImage(img3,x-130,y+20); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
@@ -278,23 +272,23 @@ function canvas(){
     $("#canvas").mouseup(function(e){handleMouseUp(e);});
     $("#canvas").mouseout(function(e){handleMouseOut(e);});
 
-}
  function move_pic(){
-      window.fr=false;
-      window.word=false;
-      window.pic=true;
+      fr=false;
+      word=false;
+      pic=true;
     }
     function move_frame(){
-      window.fr=true;
-      window.word=false;
-      window.pic=false;
+      fr=true;
+      word=false;
+      pic=false;
     }
 
     function move_word(){
-      window.fr=false;
-      window.word=true;
-      window.pic=false;
+      fr=false;
+      word=true;
+      pic=false;
     }
+
 // Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法，基本上這樣就可以不用動了，但思考authToken該怎麼拿到，因為這裡我並沒有把使用者登入的token載入到這函數內，所以它是不會得到token的
 function PostImageToFacebook(authToken) {
 	authToken = window.token;
